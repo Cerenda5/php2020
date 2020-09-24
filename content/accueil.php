@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['connecte'])){
+if (!isset($_SESSION['connecte'])) {
     header('Location: ../index.php');
 }
 
@@ -11,15 +11,20 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'bdd.php');
 $query = $bdd->prepare('SELECT * FROM annonce');
 $query->execute();
 $annonces = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-    <p><a href="disconnect.php">Se déconnecter</a></p>
-    <p><a href="createAnnonce.php">Créer des annonces</a></p>
+include 'nav.php';
 
-<?php
+echo '<main role="main">
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">';
 
-foreach ($annonces as $annonce){
-    echo '<br>_____<br>';
+foreach ($annonces as $annonce) {
     include 'annonceLinkTemplate.php';
-    echo '<br>_____<br>';
 }
+echo '</div>
+            </div>
+        </div>
+    </main>';
+
+
