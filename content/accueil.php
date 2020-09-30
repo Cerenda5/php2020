@@ -14,17 +14,16 @@ $annonces = $query->fetchAll(PDO::FETCH_ASSOC);
 
 include 'nav.php';
 
-echo '<main role="main">
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">';
+
+echo '<section class="padd-tb-60 bg-gray">
+        <div class="container">
+            <div class="row">';
 
 foreach ($annonces as $annonce) {
     include 'annonceLinkTemplate.php';
 }
 echo '</div>
-            </div>
         </div>
-    </main>';
+    </section>';
 
-
+include 'footer.php';

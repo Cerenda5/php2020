@@ -8,24 +8,23 @@ if (!isset($_SESSION['connecte'])) {
 
 require(__DIR__ . DIRECTORY_SEPARATOR . 'bdd.php');
 
-$query = $bdd->prepare('SELECT * FROM annonce WHERE `id` = ".$_GET[id]." ');
+$query = $bdd->prepare('SELECT * FROM annonce INNER JOIN user on annonce.id_user = user.id WHERE annonce.id = ' . $_GET[id] . ' ');
 $query->execute();
 $annonces = $query->fetchAll(PDO::FETCH_ASSOC);
 
-echo $annonces['id'];
-
 include 'nav.php';
 
-echo '<main role="main">
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">';
+echo '<section class="padd-tb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">';
 
 foreach ($annonces as $annonce) {
     include 'detailsAnnonceLinkTemplate.php';
 }
-echo '</div>
-            </div>
+echo '          </div>
         </div>
-    </main>';
+    </div>
+</section>';
 
+include 'footer.php';
